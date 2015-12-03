@@ -13,14 +13,24 @@ $("#header").prepend(formattedName);
 
 var bio={
 	"name":"Wyle E. Coyote",
-	"role": "Supra Genius",
-	"contactMobile": "In the desert",
+	"role": "Super Genius",
 	"pictureURL": "images/fry.jpg",
 	"welcomeMessage": "acme makes the best products!",
-	"skills":["Genius IQ","Expert Hunter", "Master Trap Designer"]
+    "contacts": {
+        "mobile": "",
+        "email": "",
+        "github": "",
+        "twitter": "",
+        "location": ""
+    },
+    "skills":[
+    	"Genius IQ",
+    	"Expert Hunter",
+    	 "Master Trap Designer"
+    ]
 };
 
-var formattedName = HTMLheaderName.replace("%data%",bio.name);
+/* var formattedName = HTMLheaderName.replace("%data%",bio.name);
 var formattedRole = HTMLheaderRole.replace("%data%",bio.role);
 var formattedcontactMobile = HTMLmobile.replace("%data%",bio.contactMobile);
 var formattedBioPic = HTMLbioPic.replace("%data%",bio.pictureURL);
@@ -36,3 +46,104 @@ for(item in bio.skills){
 	formattedSkills = HTMLskills.replace("%data%",bio.skills[item])
 	$("#header").append(formattedSkills);
 }
+*/
+
+var education = {
+    "schools": {
+        "school": [
+            {
+                "name": "",
+                "location": "",
+                "degree": "",
+                "majors": [],
+                "dates": "",
+                "url": ""
+            },
+            {
+                "name": "",
+                "location": "",
+                "degree": "",
+                "majors": [],
+                "dates": "",
+                "url": ""
+            },
+            {
+                "name": "",
+                "location": "",
+                "degree": "",
+                "majors": [],
+                "dates": "",
+                "url": ""
+            }
+        ],
+        "onlineCourses": {
+            "onlineCourse": [
+                {
+                    "title": "",
+                    "school": "",
+                    "dates": "",
+                    "url": ""
+                },
+                {
+                    "title": "",
+                    "school": "",
+                    "dates": "",
+                    "url": ""
+                },
+                {
+                    "title": "",
+                    "school": "",
+                    "dates": "",
+                    "url": ""
+                }
+            ]
+        }
+    }
+}
+
+var work = {
+    "jobs": [
+        {
+            "employer": "",
+            "title": "",
+            "dates": "",
+            "description": ""
+        },
+        {
+            "employer": "",
+            "title": "",
+            "dates": "",
+            "description": ""
+        },
+        {
+            "employer": "",
+            "title": "",
+            "dates": "",
+            "description": ""
+        }
+    ]
+}
+
+var projects = {
+    "project": [
+        {
+            "title": "",
+            "dates": "",
+            "description": "",
+            "images": []
+        },
+        {
+            "title": "",
+            "dates": "",
+            "description": "",
+            "images": []
+        },
+        {
+            "title": "",
+            "dates": "",
+            "description": "",
+            "images": []
+        }
+    ]
+}
+
