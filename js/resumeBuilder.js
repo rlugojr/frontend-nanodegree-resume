@@ -196,19 +196,19 @@ var projects = {
             "title": "Batman Outfit",
             "dates": "1948",
             "description": "My award winning design was the very first wingsuit ever used.  Swoop down on prey like an eagle!",
-            "images": ["images/batman/batman_outfit_1.png","images/batman/batman_outfit_2.jpg","images/batman/batman_outfit_3.png"]
+            "images": ["images/batman/batman_outfit_1.png","images/batman/batman_outfit_2.png","images/batman/batman_outfit_3.png"]
         },
         {
             "title": "Rocket Sled",
             "dates": "1947",
             "description": "Reach speeds of over 400MPH with a Rocket Sled.  No Roadrunner can outrun this before they run out of road!",
-            "images": ["images/sled/sled_1.png","images/sled/sled_2.jpg","images/sled/sled_3.png"]
+            "images": ["images/sled/sled_1.png","images/sled/sled_2.png","images/sled/sled_3.png"]
         },
         {
             "title": "Jet Powered Roller Skates",
             "dates": "1946",
             "description": "It looked better on paper.  Good in theory but truly painful when applied to real life.",
-            "images": ["images/skates/skates_1.jpg","images/skates/skates_2.png","images/skates/skates_3.jpg"]
+            "images": ["images/skates/skates_1.png","images/skates/skates_2.png","images/skates/skates_3.png"]
         }
     ],
     "display":""
