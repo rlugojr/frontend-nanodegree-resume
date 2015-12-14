@@ -64,7 +64,7 @@ var education = {
             "location": "Bluff, Utah",
             "degree": "Doctorate ",
             "majors": ["Mechanical Engineering","Electrical Engineering","Cartoon Physics"],
-            "date": "1935 - 1942",
+            "date": 1942,
             "url": "www.mvu.com"
         },
         {
@@ -72,7 +72,7 @@ var education = {
             "location": "Durango, Colorado",
             "degree": "Diploma",
             "majors": ["Mathematics","Literature","History"],
-            "date": "1930 - 1935",
+            "date": 1935,
             "url": "www.mvhs.com"
         },
         {
@@ -80,7 +80,7 @@ var education = {
             "location": "Kayenta, Arizona",
             "degree": "Graduated",
             "majors": ["Chasing birds", "Chasing Mice", "First Aid"],
-            "date": "1924 - 1930",
+            "date": 1930,
             "url": "www.mves.com"
         }
     ],
@@ -88,19 +88,19 @@ var education = {
         {
             "title": "Coping with Depression",
             "school": "Monument Valley Online",
-            "date": "1947",
+            "date": 1947,
             "url": "www.mvo.com"
         },
         {
             "title": "Roadrunners: Sure Fire Traps",
             "school": "Monument Valley Online",
-            "date": "1946",
+            "date": 1946,
             "url": "www.mvo.com"
         },
         {
             "title": "How to Prepare Roadrunner",
             "school": "Monument Valley Online",
-            "date": "1945",
+            "date": 1945,
             "url": "www.mvo.com"
         }
     ],
@@ -112,8 +112,7 @@ var education = {
             var formattedLocation = HTMLschoolLocation.replace("%data%",education.schools[school].location);
 
             $("#education").append(HTMLschoolStart);
-            $(".education-entry:last").append(formattedName);
-            $(".education-entry:last").append(formattedDegree);
+            $(".education-entry:last").append(formattedName + formattedDegree);
             $(".education-entry:last").append(formattedDates);
             $(".education-entry:last").append(formattedLocation);
 
@@ -130,8 +129,7 @@ var education = {
             var formattedDate = HTMLonlineDates.replace("%data%",education.onlineCourses[course].date);
             var formattedURL = HTMLonlineURL.replace("%data%",education.onlineCourses[course].url);
 
-            $(".education-entry:last").append(formattedTitle);
-            $(".education-entry:last").append(formattedSchool);
+            $(".education-entry:last").append(formattedTitle + formattedSchool);
             $(".education-entry:last").append(formattedDate);
             $(".education-entry:last").append(formattedURL);
         }
