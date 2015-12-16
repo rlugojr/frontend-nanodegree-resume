@@ -258,6 +258,20 @@ function inName(name) {
     return finalName;
 }
 
+function wileSpeak(){
+    var snd=document.getElementById("wileSpeak");
+    snd.play();
+}
+
+
+function rrMeep(){
+    var snd=document.getElementById("rrMeep");
+    snd.play();
+}
+
+
+
+
 fillValues();
 
 

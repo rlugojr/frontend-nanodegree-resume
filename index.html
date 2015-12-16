@@ -92,8 +92,21 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
   writing. In resumeBuilder.js, you'll be writing code that builds the resume
   dynamically when this website, index.html, is opened.
   -->
-  <script src="js/resumeBuilder.js"></script>
 
+
+  <audio id="wileSpeak">
+    <source src="sounds/wile.ogg" type="audio/ogg">
+    <source src="sounds/wile.mp3" type="audio/mp3">
+  </audio>
+
+  <audio id="rrMeep">
+    <source src="sounds/meepmeep.ogg" type="audio/ogg">
+    <source src="sounds/meepmeep.mp3" type="audio/mp3">
+  </audio>
+
+
+
+  <script src="js/resumeBuilder.js"></script>
 
   <!--
   These scripts are written in JavaScript. You'll be breaking them down as part of
@@ -140,5 +153,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
       document.getElementById('mapDiv').style.display = 'none';
     }
   </script>
+
+
 </body>
 </html>
