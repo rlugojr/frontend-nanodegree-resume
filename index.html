@@ -37,10 +37,14 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
   the DOM. jQuery is fast and easy to use, but it doesn't do anything
   you can't accomplish with vanilla (regular) JavaScript.
   -->
+  <link rel="stylesheet" href="css/jquery-ui.min.css">
   <script src="js/jQuery.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+
+  <!-- <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
 
 
-<link href='https://fonts.googleapis.com/css?family=Rubik:400,500,700,900,300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rubik:400,500,700,900,300' rel='stylesheet' type='text/css'>
 
   <!-- More on helper.js in the class -->
   <script src="js/helper.js"></script>
@@ -49,7 +53,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
   Uncomment the <script> tag below when you're ready to add an interactive
   Google Map to your resume!
   -->
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
 
 
@@ -68,17 +72,19 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
       <ul id="topContacts" class="flex-box"></ul>
     </div>
     <div style="clear: both;"></div>
-    <div id="workExperience" class="gray">
+    <div id="accordion">
       <h2 class="brown-text">Work Experience</h2>
-    </div>
-    <div id="projects">
+      <div id="workExperience" class="gray">
+      </div>
       <h2 class="brown-text">Projects</h2>
-    </div>
-    <div id="education" class="gray">
+      <div id="projects">
+      </div>
       <h2 class="brown-text">Education</h2>
-    </div>
-    <div id="mapDiv">
+      <div id="education" class="gray">
+      </div>
       <h2 class="brown-text">Where I've Lived and Worked</h2>
+      <div id="mapDiv">
+      </div>
     </div>
     <div id="lets-connect">
       <h3 class="orange center-text brown-text">Let's Connect</h3>
@@ -87,11 +93,6 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     </div>
   </div>
 
-  <!--
-  The next line tells the browser where to download the JavaScript file you'll be
-  writing. In resumeBuilder.js, you'll be writing code that builds the resume
-  dynamically when this website, index.html, is opened.
-  -->
 
 
   <audio id="wileSpeak">
@@ -104,6 +105,11 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     <source src="sounds/meepmeep.mp3" type="audio/mp3">
   </audio>
 
+  <!--
+  The next line tells the browser where to download the JavaScript file you'll be
+  writing. In resumeBuilder.js, you'll be writing code that builds the resume
+  dynamically when this website, index.html, is opened.
+  -->
 
 
   <script src="js/resumeBuilder.js"></script>

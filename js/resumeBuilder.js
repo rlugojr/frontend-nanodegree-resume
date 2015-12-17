@@ -233,6 +233,20 @@ var projects = {
     }
 };
 
+
+
+$(function() {
+      $( "#accordion" ).accordion();
+});
+
+
+// Setter
+$( ".selector" ).accordion( "option", "header", "h2" );
+$( ".selector" ).accordion({heightStyle: "content"});
+
+
+
+
 function fillValues(){
     bio.display();
     education.display();
