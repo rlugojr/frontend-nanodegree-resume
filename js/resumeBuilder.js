@@ -242,8 +242,7 @@ $(function() {
 
 // Setter
 $( ".selector" ).accordion( "option", "header", "h2" );
-$( ".selector" ).accordion({heightStyle: "content"});
-
+$( ".selector" ).accordion( "option", "heightStyle", "content" );
 
 
 
@@ -287,6 +286,8 @@ function rrMeep(){
 
 
 fillValues();
+wileSpeak();
+
 
 
 
