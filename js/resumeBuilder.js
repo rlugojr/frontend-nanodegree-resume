@@ -60,7 +60,7 @@ var bio={
 var education = {
     "schools": [
         {
-            "name": "Monument Valley Univeristy",
+            "name": "Monument Valley University",
             "location": "Bluff, Utah",
             "degree": "Doctorate ",
             "majors": ["Mechanical Engineering","Electrical Engineering","Cartoon Physics"],
@@ -236,15 +236,13 @@ var projects = {
 
 
 $(function() {
-      $( "#accordion" ).accordion();
+      $( "#accordion" ).accordion({
+      collapsible: true,
+      active: -1,
+      header: "h2",
+      heightStyle: "content"
+    });
 });
-
-
-// Setter
-$( ".selector" ).accordion( "option", "header", "h2" );
-$( ".selector" ).accordion( "option", "heightStyle", "content" );
-
-
 
 function fillValues(){
     bio.display();
@@ -282,12 +280,26 @@ function rrMeep(){
     snd.play();
 }
 
-
-
+$(".card-popup").magnificPopup({
+    type: 'image',
+    showCloseBtn: false,
+    closeOnContentClick: true,
+    mainClass: 'mfp-no-margins',
+    image: {
+        verticalFit: true,
+        titleSrc: function(item){
+            return "Can't get Internet Access in the desert.  No LinkedIn, sorry, so take my card instead."
+        }
+    }
+});
 
 fillValues();
+
 wileSpeak();
 
+$("#wileyPic").hide("slide", {direction: "left"});
+
+$("#wileyPic").show("slide", {direction: "right"},2000);
 
 
 
