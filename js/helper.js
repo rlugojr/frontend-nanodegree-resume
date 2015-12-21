@@ -1,16 +1,14 @@
 /*
-
-This file contains all of the code running in the background that makes resumeBuilder.js possible. We call these helper functions because they support your code in this course.
-
-Don't worry, you'll learn what's going on in this file throughout the course. You won't need to make any changes to it until you start experimenting with inserting a Google Map in Problem Set 3.
-
-Cameron Pittman
+This file contains all of the code that will be modified by the objects in resumeBuilder.js
+and appended to index.html using the "display()" function from those objects.
+It also contains the code for configuration of Google Maps in preparation for data from the objects.
+The function for the "Internationl Name Challenge" is defined here as well.
 */
 
 
 /*
-These are HTML strings. As part of the course, you'll be using JavaScript functions
-replace the %data% placeholder text you see in them.
+These are HTML strings that are modified with values from corresponding object data found in resumeBuilder.js using jQuery replacements.
+The strings are used by the "display()" function to populate index.html with the available elements.
 */
 var HTMLheaderName = '<h1 id="name" class="brown-text">%data%</h1>';
 var HTMLheaderRole = '<span class="orange-text">%data%</span><hr>';
@@ -60,177 +58,175 @@ var googleMap = '<div id="map"></div>';
 
 
 /*
-The International Name challenge in Lesson 2 where you'll create a function that will need this helper code to run. Don't delete! It hooks up your code to the button you'll be appending.
+The International Name challenge function requested from Lesson 2, which is called by the "InternationalizeButton".
 */
 $(document).ready(function() {
-  $('button').click(function() {
-    var iName = inName() || function(){};
-    $('#name').html(iName);
-  });
+    $('button').click(function() {
+        var iName = inName() || function() {};
+        $('#name').html(iName);
+    });
 });
 
 /*
-The next few lines about clicks are for the Collecting Click Locations quiz in Lesson 2.
+This section defines the variables and functions used for Collecting Click Locations in response to the quiz in Lesson 2.
 */
 clickLocations = [];
 
-function logClicks(x,y) {
-  clickLocations.push(
-    {
-      x: x,
-      y: y
-    }
-  );
-  console.log('x location: ' + x + '; y location: ' + y);
+function logClicks(x, y) {
+    clickLocations.push({
+        x: x,
+        y: y
+    });
+    console.log('x location: ' + x + '; y location: ' + y);
 }
 
 $(document).click(function(loc) {
-  logClicks(loc.pageX, loc.pageY);
+    logClicks(loc.pageX, loc.pageY);
 });
 
 
 
 /*
-This is the fun part. Here's where we generate the custom Google Map for the website.
-See the documentation below for more details.
-https://developers.google.com/maps/documentation/javascript/reference
+Configuration and instanciation of the custom Google Map for the website follows in the remaining section of this file,
+using the data from the resumeBuilder.js objects.
 */
-var map;    // declares a global map variable
-
+var map; // declares a global map variable
 
 /*
 Start here! initializeMap() is called when page is loaded.
 */
 function initializeMap() {
 
-  var locations;
+    var locations;
 
-  var mapOptions = {
-    disableDefaultUI: true
-  };
+    var mapOptions = {
+        disableDefaultUI: true
+    };
 
-  /*
-  For the map to be displayed, the googleMap var must be
-  appended to #mapDiv in resumeBuilder.js.
-  */
-  map = new google.maps.Map(document.querySelector('#map'), mapOptions);
+    /*
+    For the map to be displayed, the googleMap var must be
+    appended to #mapDiv in resumeBuilder.js.
+    */
+    map = new google.maps.Map(document.querySelector('#map'), mapOptions);
 
 
-  /*
-  locationFinder() returns an array of every location string from the JSONs
-  written for bio, education, and work.
-  */
-  function locationFinder() {
+    /*
+    locationFinder() returns an array of every location string from the objects
+    written for bio, education, and work.
+    */
+    function locationFinder() {
 
-    // initializes an empty array
-    var locations = [];
+        // initializes an empty array
+        var locations = [];
 
-    // adds the single location property from bio to the locations array
-    locations.push(bio.contacts.location);
+        // adds the single location property from bio to the locations array
+        locations.push(bio.contacts.location);
 
-    // iterates through school locations and appends each location to
+        // iterates through school locations and appends each location to
+        // the locations array
+        for (var school in education.schools) {
+            locations.push(education.schools[school].location);
+        }
+
+        // iterates through work locations and appends each location to
+        // the locations array
+        for (var job in work.jobs) {
+            locations.push(work.jobs[job].location);
+        }
+
+        return locations;
+    }
+
+    /*
+    createMapMarker(placeData) reads Google Places search results to create map pins.
+    placeData is the object returned from search results containing information
+    about a single location.
+    */
+    function createMapMarker(placeData) {
+
+        // The next lines save location data from the search result object to local variables
+        var lat = placeData.geometry.location.lat(); // latitude from the place service
+        var lon = placeData.geometry.location.lng(); // longitude from the place service
+        var name = placeData.formatted_address; // name of the place from the place service
+        var bounds = window.mapBounds; // current boundaries of the map window
+
+        // marker is an object with additional data about the pin for a single location
+        // I have assigned a custom marker using an image of the Roadrunner.
+        var image = "images/marker/roadrunner_pin_med.gif";
+        var marker = new google.maps.Marker({
+            map: map,
+            icon: image,
+            animation: google.maps.Animation.DROP,
+            position: placeData.geometry.location,
+            title: name
+        });
+
+        // infoWindows are the little helper windows that open when you click
+        // or hover over a pin on a map. They usually contain more information
+        // about a location.
+        var infoWindow = new google.maps.InfoWindow({
+            content: name
+        });
+
+        // This is a listener for onclick of a google map marker. It displsyd sn info window and plays
+        // the RoadRunner audio.
+        google.maps.event.addListener(marker, 'click', function() {
+            infoWindow.open(map, marker);
+            rrMeep();
+        });
+
+        // this is where the pin actually gets added to the map.
+        // bounds.extend() takes in a map location object
+        bounds.extend(new google.maps.LatLng(lat, lon));
+        // fit the map to the new marker
+        map.fitBounds(bounds);
+        // center the map
+        map.setCenter(bounds.getCenter());
+    }
+
+    /*
+    callback(results, status) makes sure the search returned results for a location.
+    If so, it creates a new map marker for that location.
+    */
+    function callback(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+            createMapMarker(results[0]);
+        }
+    }
+
+    /*
+    pinPoster(locations) takes in the array of locations created by locationFinder()
+    and fires off Google place searches for each location
+    */
+    function pinPoster(locations) {
+
+        // creates a Google place search service object. PlacesService does the work of
+        // actually searching for location data.
+        var service = new google.maps.places.PlacesService(map);
+
+        // Iterates through the array of locations, creates a search object for each location
+        for (var place in locations) {
+
+            // the search request object
+            var request = {
+                query: locations[place]
+            };
+
+            // Actually searches the Google Maps API for location data and runs the callback
+            // function with the search results after each search.
+            service.textSearch(request, callback);
+        }
+    }
+
+    // Sets the boundaries of the map based on pin locations
+    window.mapBounds = new google.maps.LatLngBounds();
+
+    // locations is an array of location strings returned from locationFinder()
+    locations = locationFinder();
+
+    // pinPoster(locations) creates pins on the map for each location in
     // the locations array
-    for (var school in education.schools) {
-      locations.push(education.schools[school].location);
-    }
-
-    // iterates through work locations and appends each location to
-    // the locations array
-    for (var job in work.jobs) {
-      locations.push(work.jobs[job].location);
-    }
-
-    return locations;
-  }
-
-  /*
-  createMapMarker(placeData) reads Google Places search results to create map pins.
-  placeData is the object returned from search results containing information
-  about a single location.
-  */
-  function createMapMarker(placeData) {
-
-    // The next lines save location data from the search result object to local variables
-    var lat = placeData.geometry.location.lat();  // latitude from the place service
-    var lon = placeData.geometry.location.lng();  // longitude from the place service
-    var name = placeData.formatted_address;   // name of the place from the place service
-    var bounds = window.mapBounds;            // current boundaries of the map window
-
-    // marker is an object with additional data about the pin for a single location
-    var image = "images/marker/roadrunner_pin_med.gif";
-    var marker = new google.maps.Marker({
-      map: map,
-      icon : image,
-      animation: google.maps.Animation.DROP,
-      position: placeData.geometry.location,
-      title: name
-    });
-
-    // infoWindows are the little helper windows that open when you click
-    // or hover over a pin on a map. They usually contain more information
-    // about a location.
-    var infoWindow = new google.maps.InfoWindow({
-      content: name
-    });
-
-    // hmmmm, I wonder what this is about...
-    google.maps.event.addListener(marker, 'click', function() {
-      infoWindow.open(map,marker);
-      rrMeep();
-    });
-
-    // this is where the pin actually gets added to the map.
-    // bounds.extend() takes in a map location object
-    bounds.extend(new google.maps.LatLng(lat, lon));
-    // fit the map to the new marker
-    map.fitBounds(bounds);
-    // center the map
-    map.setCenter(bounds.getCenter());
-  }
-
-  /*
-  callback(results, status) makes sure the search returned results for a location.
-  If so, it creates a new map marker for that location.
-  */
-  function callback(results, status) {
-    if (status == google.maps.places.PlacesServiceStatus.OK) {
-      createMapMarker(results[0]);
-    }
-  }
-
-  /*
-  pinPoster(locations) takes in the array of locations created by locationFinder()
-  and fires off Google place searches for each location
-  */
-  function pinPoster(locations) {
-
-    // creates a Google place search service object. PlacesService does the work of
-    // actually searching for location data.
-    var service = new google.maps.places.PlacesService(map);
-
-    // Iterates through the array of locations, creates a search object for each location
-    for (var place in locations) {
-
-      // the search request object
-      var request = {
-        query: locations[place]
-      };
-
-      // Actually searches the Google Maps API for location data and runs the callback
-      // function with the search results after each search.
-      service.textSearch(request, callback);
-    }
-  }
-
-  // Sets the boundaries of the map based on pin locations
-  window.mapBounds = new google.maps.LatLngBounds();
-
-  // locations is an array of location strings returned from locationFinder()
-  locations = locationFinder();
-
-  // pinPoster(locations) creates pins on the map for each location in
-  // the locations array
-  pinPoster(locations);
+    pinPoster(locations);
 
 }
 
@@ -244,7 +240,6 @@ window.addEventListener('load', initializeMap);
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
 window.addEventListener('resize', function(e) {
-  //Make sure the map bounds get updated on page resize
-  map.fitBounds(mapBounds);
+    //Make sure the map bounds get updated on page resize
+    map.fitBounds(mapBounds);
 });
-

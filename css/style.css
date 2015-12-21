@@ -1,3 +1,5 @@
+/*Set the initial CSS for the main elements that share the same initial CSS properties.*/
+
 body,
 div,
 ul,
@@ -11,6 +13,9 @@ h6 {
     font-family: "Roboto", sans-serif;
 }
 
+
+/*Set the initial CSS for the main elements that share the same initial CSS properties.*/
+
 h1,
 h2,
 h3,
@@ -21,21 +26,8 @@ h3,
     font-family: 'Rubik', sans-serif;
 }
 
-.clear-fix {
-    overflow: auto;
-}
 
-.education-entry-heading,
-.work-entry-heading,
-.project-entry-heading {
-    font-weight: bold;
-}
-
-.education-entry,
-.work-entry,
-.project-entry {
-    padding: 0 5%;
-}
+/*Set the CSS over-rides for the elements which were already defined but require further CSS definition.*/
 
 h1 {
     font-size: 40px;
@@ -74,22 +66,6 @@ h5 {
     padding: 10px 5%;
 }
 
-.date-text {
-    font-style: italic;
-    font-size: 14px;
-    color: #999;
-    line-height: 16px;
-    float: left;
-}
-
-.location-text {
-    font-style: italic;
-    font-size: 14px;
-    color: #999;
-    line-height: 16px;
-    float: right;
-}
-
 p {
     font-size: 14px;
     color: #333;
@@ -103,6 +79,70 @@ a {
     display: block;
 }
 
+ul {
+    list-style-type: none;
+}
+
+img {
+    padding: 10px;
+}
+
+span {
+    padding: 5px;
+}
+
+
+/*Set the CSS for the header background.*/
+
+#header {
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+/*Set the CSS for the heading entries in the Resume sections.*/
+
+.education-entry-heading,
+.work-entry-heading,
+.project-entry-heading {
+    font-weight: bold;
+}
+
+
+/*Set the CSS for the detail entries in the Resume sections.*/
+
+.education-entry,
+.work-entry,
+.project-entry {
+    padding: 0 5%;
+}
+
+
+/*Set the CSS for "Date" values.*/
+
+.date-text {
+    font-style: italic;
+    font-size: 14px;
+    color: #999;
+    line-height: 16px;
+    float: left;
+}
+
+
+/*Set the CSS for "Location" values.*/
+
+.location-text {
+    font-style: italic;
+    font-size: 14px;
+    color: #999;
+    line-height: 16px;
+    float: right;
+}
+
+
+/*Set the CSS for specific selectors.*/
+
 .welcome-message {
     font-style: italic;
     font-size: 25px;
@@ -112,6 +152,10 @@ a {
 #skills-h3 {
     display: none;
     margin-top: 20px;
+}
+
+.clear-fix {
+    overflow: auto;
 }
 
 .orange {
@@ -147,12 +191,6 @@ a {
     background-color: #4a4a4a;
 }
 
-#header {
-    background-image: url("../images/background.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
 .flex-box {
     display: -webkit-flex;
     display: flex;
@@ -175,23 +213,11 @@ a {
     padding: 2.5% 5%;
 }
 
-ul {
-    list-style-type: none;
-}
-
 .biopic {
     float: left;
     height: 225px;
     display: none;
     padding-top: 0;
-}
-
-img {
-    padding: 10px;
-}
-
-span {
-    padding: 5px;
 }
 
 #lets-connect {
@@ -211,22 +237,21 @@ span {
 }
 
 #open-popup {
-  padding:20px
+    padding: 20px
 }
 
 .white-popup {
-  position: relative;
-  background: #FFF;
-  padding: 40px;
-  width: auto;
-  max-width: 200px;
-  margin: 20px auto;
-  text-align: center;
+    position: relative;
+    background: #FFF;
+    padding: 40px;
+    width: auto;
+    max-width: 200px;
+    margin: 20px auto;
+    text-align: center;
 }
 
 
-
-/* Media queries to handle elements displayed at various device widths */
+/* Specify CSS for Media rules set to handle elements displayed at various device widths */
 
 @media only screen and (max-width: 1024px) {
     #lets-connect {
